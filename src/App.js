@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(SessionRoute);
 app.use(UserRoute);
 app.use(HouseRoute);
-
+app.use('/uploads', express.static('uploads'));
 app.listen(process.env.PORT || 3333, () => {
     console.log(`Server Start in Port ${process.env.PORT || 3333}`)
 });

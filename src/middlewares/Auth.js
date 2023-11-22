@@ -4,12 +4,10 @@ const { promisify } = require('util');
 require('dotenv').config();
 
 module.exports = async (req, res, next) => {
-	const authHeader = req.headers.authorization;
+	const token = req.headers.authorization;
 
-	if (!authHeader)
+	if (!token)
 		return res.status(401).json({ error: 'Token não existe.' });
-
-	const [, token] = authHeader.split(' ');
 
 	try {
 		const decoded = await promisify(jwt.verify)(
@@ -17,8 +15,11 @@ module.exports = async (req, res, next) => {
 			process.env.JWT_SECRET
 		);
 
+		console.log(decoded);
 		req.user_id = decoded.id;
 		req.email = decoded.email;
+
+		console.log(req.user_id)
 
 		return next();
 	} catch (err) {

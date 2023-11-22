@@ -14,13 +14,17 @@ const HouseSchema = new Schema(
 			type: Number,
 			required: true,
 		},
-		location: {
-			type: String,
+		dateInitial: {
+			type: Date,
+			required: true,
+		},
+		dateFinished: {
+			type: Date,
 			required: true,
 		},
 		status: {
 			type: Boolean,
-			required: true,
+			required: false,
 		},
 		user: {
 			type: Schema.Types.ObjectId,
@@ -35,6 +39,6 @@ const HouseSchema = new Schema(
 );
 
 HouseSchema.virtual('thumbnail_url').get(function () {
-	return `${process.env.PATH_UPLOADS}/${this.thumbnail}`;
+	return `http://localhost:5000/uploads/${this.thumbnail}`;
 });
 module.exports = model('House', HouseSchema);
