@@ -39,6 +39,6 @@ const HouseSchema = new Schema(
 );
 
 HouseSchema.virtual('thumbnail_url').get(function () {
-	return `http://localhost:5000/uploads/${this.thumbnail}`;
+	return `https://airbo-api.onrender.com/uploads/${this.thumbnail}`;
 });
 module.exports = model('House', HouseSchema);
