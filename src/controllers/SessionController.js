@@ -12,12 +12,12 @@ module.exports = {
 			if (!response)
 				return res
 					.status(401)
-					.json({ error: 'E-mail não encontrado.' });
+					.json({ error: 'Email not found.' });
 
 			if (!(await bcrypt.compare(password, response.password)))
-				return res.status(401).json({ error: 'Senha incorreta.' });
+				return res.status(401).json({ error: 'Incorrect password.' });
 
-			// Dados do Usuário
+			// User data
 			const { _id: id, name } = response;
 
 			return res.json({

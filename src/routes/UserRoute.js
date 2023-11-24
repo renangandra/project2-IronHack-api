@@ -5,7 +5,7 @@ const AuthMiddleware = require('../middlewares/Auth.js');
 
 const UserRoute = new Router();
 
-/*	ROTAS DE USUÁRIOS  */
+/* USER ROUTES */
 UserRoute.post('/users', UserController.store);
 UserRoute.get('/users', AuthMiddleware, UserController.index);
 UserRoute.get('/users/:user_id', AuthMiddleware, UserController.show);

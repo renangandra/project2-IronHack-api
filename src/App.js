@@ -6,12 +6,12 @@ require('dotenv').config();
 
 const { SessionRoute, UserRoute, HouseRoute } = require('./routes');
 
-//Conexão com banco de dados
+//Connection to database
 mongoose.connect(process.env.MONGO);
 
 const app = express();
 
-//URLs que podem acessar sua API
+//URLs that can access your API
 app.use(cors());
 app.use(express.json());
 app.use(SessionRoute);

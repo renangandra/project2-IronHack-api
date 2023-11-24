@@ -4,7 +4,7 @@ const User = require('../models/User');
 
 module.exports = {
     
-    //Listagen de todos os usuários
+    //List of all users
     async index(req, res){
         try {
 			const response = await House.find();
@@ -27,7 +27,7 @@ module.exports = {
 		}
     },
 
-    // Detalhes determinado usuário
+    // Specific user details
     async show(req, res){
         const { house_id } = req.params;
 
@@ -42,7 +42,7 @@ module.exports = {
 		}
     },
 
-    //criação usuário
+    //user creation
     async store(req, res){
 		try {
 			const { filename } = req.file;
@@ -63,7 +63,7 @@ module.exports = {
 		}
     },
 
-    //deleção
+    //deletion
     async destroy(req, res){
         const { house_id } = req.params;
 
@@ -71,17 +71,17 @@ module.exports = {
             const user = await User.findById(req.user_id);
 			const response = await House.findById(house_id);
             if (String(user._id) !== String(response.user))
-                return res.status(401).json({ error: 'Não autorizado.' });
+                return res.status(401).json({ error: 'Not authorized.' });
         
 			await response.deleteOne();
 
-			return res.json({ message: 'Exclusão bem sucedida.' });
+			return res.json({ message: 'Successful deletion.' });
 		} catch (err) {
 			return res.status(400).json({ error: err.message });
 		}
     },
 
-    //editar
+    //To edit
     async update(req, res){
         const { house_id } = req.params;
         const { user_id } = req;
@@ -92,7 +92,7 @@ module.exports = {
 
 			// Validando se esse e-mail não pertence a outro usuário
 			if (String(user._id) !== String(house.user))
-			    return res.status(401).json({ error: 'Não autorizado.' });
+			    return res.status(401).json({ error: 'Not authorized.' });
 
 			const response = await House.findOneAndUpdate(
 				{ _id: house_id },

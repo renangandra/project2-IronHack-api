@@ -4,7 +4,7 @@ const SessionController = require('../controllers/SessionController.js');
 
 const SessionRoute = new Router();
 
-/*	ROTAS DE CONTAS/AUTENTICAÇÃO  */
+/*	ACCOUNT/AUTHENTICATION ROUTES  */
 SessionRoute.post('/sessions', SessionController.store);
 
 module.exports = SessionRoute;

@@ -8,7 +8,7 @@ const AuthMiddleware = require('../middlewares/Auth.js');
 const upload = multer(MulterMiddleware);
 const HouseRoute = new Router();
 
-/*	ROTAS DE USUÁRIOS  */
+/*	USER ROUTES  */
 HouseRoute.post('/houses', AuthMiddleware, upload.single('thumbnail'), HouseController.store);
 HouseRoute.get('/houses', HouseController.index);
 HouseRoute.get('/houses-by-user', AuthMiddleware, HouseController.showByUser);

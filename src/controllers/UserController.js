@@ -3,7 +3,7 @@ const User = require('../models/User');
 
 module.exports = {
     
-    //Listagen de todos os usuários
+    // List of all users
     async index(req, res){
         try {
 			const response = await User.find();
@@ -14,7 +14,7 @@ module.exports = {
 		}
     },
 
-    // Detalhes determinado usuário
+    // Specific user details
     async show(req, res){
         const { user_id } = req.params;
 
@@ -29,7 +29,7 @@ module.exports = {
 		}
     },
 
-    //criação usuário
+    //user creation
     async store(req, res){
 		try {
 			const userExists = await User.findOne({
@@ -41,7 +41,7 @@ module.exports = {
 			if (userExists)
 				return res
 					.status(400)
-					.json({ error: 'Esse usuário já existe.' });
+					.json({ error: 'This user already exists.' });
 
 			const response = await User.create(req.body);
 
@@ -51,7 +51,7 @@ module.exports = {
 		}
     },
 
-    //deleção
+    // deletion
     async destroy(req, res){
         const { user_id } = req.params;
 
@@ -60,20 +60,20 @@ module.exports = {
 
 			await response.remove();
 
-			return res.json({ message: 'Exclusão bem sucedida.' });
+			return res.json({ message: 'Successful deletion.' });
 		} catch (err) {
 			return res.status(400).json({ error: err.message });
 		}
     },
 
-    //editar
+    //To edit
     async update(req, res){
         const { user_id } = req.params;
 
 		try {
 			const user = await User.findById(user_id);
 
-			// Validando se esse e-mail não pertence a outro usuário
+			// Validating that this email does not belong to another user
 			if (req.body.email && req.body.email !== user.email) {
 				const userExists = await User.findOne({
 					email: req.body.email,
@@ -81,7 +81,7 @@ module.exports = {
 
 				if (userExists)
 					return res.status(400).json({
-						error: 'Esse e-mail já pertence a outro usuário.',
+						error: 'This email already belongs to another user.',
 					});
 			}
 
