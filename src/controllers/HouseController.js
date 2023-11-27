@@ -20,6 +20,7 @@ module.exports = {
 			const response = await House.find({
 				user: req.user_id,
 			});
+			
 
 			return res.json(response);
 		} catch (err) {
